@@ -62,7 +62,7 @@ int getLength(Node* fp) //get length of the linked list
 }
 
 
-Node* removeNthNode(int i,Node* p) //removes i-th node(zero-based w/ negative indexing)
+Node* removeNode(int i,Node* p) //removes i-th node(zero-based w/ negative indexing)
 {                                  //and returns new first node(if applicable,else NULL)
     int n = 0;
     int len = getLength(p);
@@ -84,7 +84,7 @@ Node* removeNthNode(int i,Node* p) //removes i-th node(zero-based w/ negative in
     {
         prev = p; //predecessor pointer
         p = next; //current pointer
-        next = p->n; //next pointer
+        next = next->n; //next pointer
         n++;
     }
 
@@ -101,5 +101,55 @@ Node* removeNthNode(int i,Node* p) //removes i-th node(zero-based w/ negative in
     prev->n = next; 
     return NULL;
 
+}
+
+Node* addNode(int i,char c, Node* p)
+{
+    //i > len - 1(last index) : do nothing
+    //i == len - 1(last index) : prev->n = newnode 
+    //i == 0: fp = newnode, newnocde->n = fp
+    //else : prev->n = newnode, newnode->n = next
+
+
+    int n = 0;
+    int len = getLength(p);
+    Node* nn = new Node;
+    nn->c = c;
+    Node *prev,*next;
+    next = p->n; 
+
+    if ((i > len - 1) || (-i > len)) 
+    {
+        return NULL; 
+    }
+
+    if (i < 0)
+    {
+        i = len + i; 
+    }
+
+
+
+    while (n < i)
+    {
+        prev = p; //predecessor pointer
+        p = next; //current pointer
+        next = next->n; //next pointer
+        n++;
+    }
+
+    if (i == 0)
+    {
+        nn->n = p;
+        return nn;
+    }
+
+    
+    prev->n = nn;
+    nn->n = p;
+
+    
+
+    return NULL;
 }
 
