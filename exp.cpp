@@ -23,16 +23,17 @@ int main()
     //cin >> word; //use getline because cin stops at first whitespace
     getline(cin,word);
     Node* myp = convertWord(word);
-
+\
     int ind;
-    Node* t; //test
+    Node* t; //test if new firstnode is being returned
     while (true)
     {
         displayLL(myp);
         cout << "Enter which letter to remove starting from 0: " << endl;
         cin >> ind;
 
-        t = removeNthNode(ind, myp);
+        //t = removeNode(ind, myp);
+        t = addNode(ind, 'X', myp);
         if (t != NULL)
         {
             myp = t;
